@@ -1,7 +1,6 @@
 var data = [];
 var ready = false;
 
-
 //will map weekday (Monday, Tuesday,...) to y position
 var dayScale = d3.scalePoint();
 
@@ -19,7 +18,7 @@ var maxCount = 0;
 function setup() {
   createCanvas(800, 600);
 
-  d3.csv("aweekofmirrors.csv", function(d) {
+  d3.csv("aweekofmirrors.csv", function (d) {
 
     return {
       time: +d.Time,
@@ -27,40 +26,40 @@ function setup() {
       count: +d.Count,
       category: d.Category
     };
-  }).then(function(csv) {
+  }).then(function (csv) {
     data = csv;
     ready = true;
 
     //create scales
     //get all weekdays
-    var weekdays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    var weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     // var weekdays = d3.set(data,function(d){
     //   return d.weekday;
     // }).values();
 
     dayScale.domain(weekdays)
-      .range([0,500]);
+      .range([0, 500]);
 
-    hourScale.domain([0,23])
-      .range([0,700]);
+    hourScale.domain([0, 23])
+      .range([0, 700]);
 
     //get the largest count
-    let maxCount = d3.max(data,function(d){
+    let maxCount = d3.max(data, function (d) {
       return d.count;
     });
 
-    rScale.domain([0,maxCount])
-      .range([0,70]);
+    rScale.domain([0, maxCount])
+      .range([0, 70]);
 
-    colorScale.domain(['Home','Outside'])
-      .range(['steelblue','grey']);
+    colorScale.domain(['Home', 'Outside'])
+      .range(['steelblue', 'grey']);
 
   });
 
 }
 
 function draw() {
-  
+
   if (!ready) {
     background(255, 0, 0);
     return;
@@ -79,22 +78,12 @@ function draw() {
 
     //circle for number of mirror views (count)
 
-    if(d.count>0){
+    if (d.count > 0) {
       var r = rScale(d.count);
       var c = colorScale(d.category);
       noFill();
       stroke(c);
-      ellipse(x,y,r,r);
+      ellipse(x, y, r, r);
     }
-
-
-
-    // // Kreis für Anzahl Spiegel
-    // for (var j = 1; j <= d.count; j++) {
-    //   var val = map(j, 0, maxCount, 0, 100);
-    //   noFill();
-    //   stroke('steelblue');
-    //   ellipse(x, y, val, val);
-    // }
   }
 }
