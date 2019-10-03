@@ -33,9 +33,7 @@ function setup() {
     //create scales
     //get all weekdays
     var weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    // var weekdays = d3.set(data,function(d){
-    //   return d.weekday;
-    // }).values();
+
 
     dayScale.domain(weekdays)
       .range([0, 500]);
