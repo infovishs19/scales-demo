@@ -34,7 +34,6 @@ function setup() {
     //get all weekdays
     var weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-
     dayScale.domain(weekdays)
       .range([0, 500]);
 
